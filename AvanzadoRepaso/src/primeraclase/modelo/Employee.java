@@ -48,11 +48,11 @@ public class Employee {
 		this.reportees = reportees;
 	}
 
-	public static Employee createEmployee(String nombre, String ubicacion, int legajo){
+	/*public static Employee createEmployee(String nombre, String ubicacion, int legajo){
 		Employee emp = new Employee();
 		emp.setLegajo(legajo);
 		emp.setName(nombre);
 		emp.setUbicacion(ubicacion);
 		return emp;
-	}
+	}*/
 }

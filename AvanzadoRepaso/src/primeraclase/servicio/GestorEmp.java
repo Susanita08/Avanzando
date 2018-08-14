@@ -26,4 +26,16 @@ public class GestorEmp {
 		empleado.setReportTo(manager);
 		manager.getReportees().add(empleado);
 	}
+	
+	public static Employee createEmployee(String nombre, String ubicacion, int legajo){
+		Employee emp = new Employee();
+		emp.setLegajo(legajo);
+		emp.setName(nombre);
+		emp.setUbicacion(ubicacion);
+		return emp;
+	}
+	
+	public static void generarEmpleados(Employee empleado) {
+		empleado.setReportees(GestorEmp.generateRandomEmployees(Utilidades.generarRandomInt(10,100), empleado.getUbicacion(), empleado.getLegajo(), empleado));
+	}
 }

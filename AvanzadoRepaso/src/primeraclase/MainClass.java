@@ -24,13 +24,17 @@ public class MainClass {
 		
 		impresion(jefeSenado, jefeDiputado);*/
 		
-		Employee presidente = Employee.createEmployee("Presidente", "presidencia", 100);
-		Employee jefeSenado = Employee.createEmployee("Jefe Senado", "senado", 200);
-		jefeSenado.setReportTo(presidente);
-		jefeSenado.setReportees(GestorEmp.generateRandomEmployees(Utilidades.generarRandomInt(10,100), "senado", 200, jefeSenado));
-		Employee jefeDiputado = Employee.createEmployee("Jefe Diputado", "congreso", 300);
-		jefeDiputado.setReportTo(presidente);
-		jefeDiputado.setReportees(GestorEmp.generateRandomEmployees(Utilidades.generarRandomInt(10, 100), "diputado", 100, jefeDiputado));
+		Employee presidente = GestorEmp.createEmployee("Presidente", "presidencia", 100);
+		Employee jefeSenado = GestorEmp.createEmployee("Jefe Senado", "senado", 200);
+		GestorEmp.establecerJerarquia(jefeSenado, presidente);
+		GestorEmp.generarEmpleados(jefeSenado);
+		//jefeSenado.setReportTo(presidente);
+		//jefeSenado.setReportees(GestorEmp.generateRandomEmployees(Utilidades.generarRandomInt(10,100), "senado", 200, jefeSenado));
+		Employee jefeDiputado = GestorEmp.createEmployee("Jefe Diputado", "congreso", 300);
+		GestorEmp.establecerJerarquia(jefeDiputado, presidente);
+		GestorEmp.generarEmpleados(jefeDiputado);
+		//jefeDiputado.setReportTo(presidente);
+		//jefeDiputado.setReportees(GestorEmp.generateRandomEmployees(Utilidades.generarRandomInt(10, 100), "diputado", 100, jefeDiputado));
 	}
 	
 	/*private static int generarRandomInt(int minimo, int maximo) {
