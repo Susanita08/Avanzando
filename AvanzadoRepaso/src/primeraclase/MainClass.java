@@ -6,6 +6,7 @@ import java.util.Random;
 
 import primeraclase.modelo.Employee;
 import primeraclase.modelo.Manager;
+import primeraclase.modelo.Votador;
 import primeraclase.servicio.GestorEmp;
 import primeraclase.servicio.Utilidades;
 
@@ -25,14 +26,53 @@ public class MainClass {
 		impresion(jefeSenado, jefeDiputado);*/
 		
 		Employee presidente = GestorEmp.createEmployee("Presidente", "presidencia", 100);
-		Employee jefeSenado = GestorEmp.createEmployee("Jefe Senado", "senado", 200);
+		Employee jefeSenado = GestorEmp.createEmployee("Jefe Senado", Votador.SENADO, 200);
 		GestorEmp.establecerJerarquia(jefeSenado, presidente);
 		GestorEmp.generarEmpleados(jefeSenado);
 		//jefeSenado.setReportTo(presidente);
 		//jefeSenado.setReportees(GestorEmp.generateRandomEmployees(Utilidades.generarRandomInt(10,100), "senado", 200, jefeSenado));
-		Employee jefeDiputado = GestorEmp.createEmployee("Jefe Diputado", "congreso", 300);
+		Employee jefeDiputado = GestorEmp.createEmployee("Jefe Diputado", Votador.DIPUTADO, 300);
 		GestorEmp.establecerJerarquia(jefeDiputado, presidente);
 		GestorEmp.generarEmpleados(jefeDiputado);
+		
+		Employee Asesor = GestorEmp.createEmployee("Asesor", Votador.DIPUTADO, 400);
+		Employee AsesorS = GestorEmp.createEmployee("Asesor", Votador.SENADO, 400);
+		///GestorEmp.generarEmpleados(Asesor);
+		
+		
+		for(Votador empleado: presidente.getReportees()) {
+			//empleado.puedeVotar();
+			empleado.elegirVoto();
+			System.out.println(empleado.getDecisionVoto());
+		}
+		
+		for(Employee empleado: jefeDiputado.getReportees()) {
+			//empleado.puedeVotar();
+			GestorEmp.generarAsesores(empleado);
+			GestorEmp.establecerJerarquia(Asesor, empleado);
+			empleado.elegirVoto();
+			System.out.println(empleado.getDecisionVoto());
+		}
+		
+		for(Employee empleado: jefeSenado.getReportees()) {
+			//empleado.puedeVotar();
+			GestorEmp.generarAsesores(empleado);
+			GestorEmp.establecerJerarquia(AsesorS, empleado);
+			empleado.elegirVoto();
+			System.out.println(empleado.getDecisionVoto());
+		}
+		
+		for(Votador empleado: Asesor.getReportees()) {
+			//empleado.puedeVotar();
+			empleado.elegirVoto();
+			System.out.println(empleado.getDecisionVoto());
+		}
+		
+		for(Votador empleado: AsesorS.getReportees()) {
+			//empleado.puedeVotar();
+			empleado.elegirVoto();
+			System.out.println(empleado.getDecisionVoto());
+		}
 		//jefeDiputado.setReportTo(presidente);
 		//jefeDiputado.setReportees(GestorEmp.generateRandomEmployees(Utilidades.generarRandomInt(10, 100), "diputado", 100, jefeDiputado));
 	}
